@@ -1,7 +1,12 @@
 /*
-  SETTINGS — the only file you need to edit to go live.
+  SETTINGS
 
-  Paste these from Supabase → Project Settings → API:
+  On Vercel, you don't need to edit this: the build copies the Supabase
+  URL and anon/publishable key from the project's environment variables
+  (see scripts/write-env.mjs and the README).
+
+  To run against Supabase locally instead, paste them here from
+  Supabase → Project Settings → API:
     supabaseUrl      "Project URL"
     supabaseAnonKey  the "anon" / "publishable" key (safe to be public;
                      the database rules in supabase/schema.sql protect the data)
@@ -9,9 +14,11 @@
   While either is blank, the site runs in PREVIEW MODE: no email, and
   answers are kept only in this browser. Good for clicking around.
 */
+import { ENV } from './env.js';
+
 export const CONFIG = {
-  supabaseUrl: '',
-  supabaseAnonKey: '',
+  supabaseUrl: '' || ENV.supabaseUrl,
+  supabaseAnonKey: '' || ENV.supabaseAnonKey,
 
   siteName: 'Game Blueprint',
   // Shown on the sign-in page so people know who's reading their answers.

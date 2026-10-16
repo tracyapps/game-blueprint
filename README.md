@@ -17,7 +17,8 @@ game-blueprint/
 │   └── assets/
 │       ├── css/main.css       compiled — don't edit, edit src/scss
 │       └── js/
-│           ├── config.js      ← the ONLY file you edit to go live
+│           ├── config.js      settings (keys come from Vercel env vars at build)
+│           ├── env.js         filled in by the build — leave blank
 │           ├── questions/     ← all the questions, one file per game
 │           ├── render.js      draws each question type
 │           ├── logic.js       show/hide rules, "is it answered", formatting
@@ -25,12 +26,13 @@ game-blueprint/
 │           ├── db.js          talks to Supabase (or the browser in preview mode)
 │           ├── survey.js · signin.js · results.js · ui.js
 ├── src/scss/                  styles (tokens = OMG brand colors, light + dark)
+├── scripts/write-env.mjs      copies Supabase keys from Vercel env vars at build
 └── supabase/schema.sql        tables, security rules, history log
 ```
 
 ## Try it right now (preview mode)
 
-While `config.js` is blank, the site runs in **preview mode**: no email, answers live only in your browser. A yellow banner says so.
+Without Supabase keys, the site runs in **preview mode**: no email, answers live only in your browser. A yellow banner says so.
 
 ```bash
 cd game-blueprint
@@ -65,14 +67,32 @@ To see the save-error state: in the browser console run `localStorage.setItem('g
    <p>Expires in 1 hour. If you didn't ask for this, ignore it.</p>
    ```
    Do the same for the **Confirm signup** template (first-timers get that one).
-7. **Project Settings → API** → copy the Project URL and the `anon` / publishable key into `public/assets/js/config.js`.
-   The anon key is meant to be public — the security rules in `schema.sql` are what protect the data.
+### 2. Connect Supabase to Vercel (pick ONE)
 
-### 2. Vercel
-- **Easiest:** in this folder run `npx vercel` and follow the prompts (framework: **Other**). `vercel.json` already sets the build (`npm run build`) and output (`public`).
-- **Or** push the folder to a Git repo and import it in Vercel. If it's inside a bigger repo, set Root Directory to `game-blueprint`.
+The site needs two public values: the Supabase **Project URL** and the **anon / publishable key**. During each Vercel build, `scripts/write-env.mjs` copies them from Vercel's environment variables into `public/assets/js/env.js`. You never paste keys into the repo.
 
-The site sends `noindex` headers so it won't show up in search.
+**Option A — Vercel's Supabase integration (what you used before)**
+1. Vercel → your `game-blueprint` project → **Storage** (or **Integrations → Supabase**) → **Connect** → pick the new Supabase project.
+2. Tick the **Production** and **Preview** environments → Connect.
+3. Vercel adds the variables itself (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and others).
+
+**Option B — add them by hand**
+Vercel → project → **Settings → Environment Variables**, add:
+| Name | Value (from Supabase → Project Settings → API) |
+|---|---|
+| `SUPABASE_URL` | Project URL |
+| `SUPABASE_ANON_KEY` | `anon` / publishable key — **never** the `service_role` / secret key |
+
+**Then, either way:** Vercel → **Deployments** → ⋯ on the latest → **Redeploy**. Environment variables only take effect on a new build.
+
+**Check it worked:** open the site. If the yellow “Preview mode” banner is gone, it's connected. If it's still there, open the deployment's **Build Logs** and look for the `[write-env]` line, which says what it found.
+
+The build script refuses to run if it's handed a secret/service-role key, so that key can't leak to the browser by accident.
+
+**Running against the real database locally:** paste the two values into `public/assets/js/config.js` instead, and don't commit that change.
+
+### 3. Deploy updates
+Push to GitHub, and Vercel rebuilds automatically. `vercel.json` already sets the build (`npm run build`) and output folder (`public`). The site sends `noindex` headers so it won't show up in search.
 
 ## Who sees what
 
