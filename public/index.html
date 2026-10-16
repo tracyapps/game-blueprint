@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light dark">
+  <title>Sign in · Game Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script type="module" src="assets/js/signin.js"></script>
+</head>
+<body class="page-signin">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside id="demo-banner" class="demo-banner" aria-label="Preview mode" hidden>
+    <strong>Preview mode.</strong> No database is connected yet, so answers are only kept in this browser.
+  </aside>
+  <header class="site-header">
+    <p class="brand"><span class="brand-mark" aria-hidden="true">GB</span> Game Blueprint</p>
+    <button id="theme-toggle" class="btn btn-quiet btn-small" type="button" aria-pressed="false">Dark mode</button>
+  </header>
+
+  <main id="main" class="signin-main">
+    <div class="signin-intro">
+      <h1>Every game, explained like a system.</h1>
+      <p class="lede">Before the app can run a game, it needs to know <em>exactly</em> how the game works: every step, every rule, every “what if.” This is where we write that down — one game at a time.</p>
+      <ul class="facts">
+        <li><strong>Go at your own pace.</strong> Leave whenever you want and pick up where you left off.</li>
+        <li><strong>Everything saves as you type.</strong> You’ll always see when it’s saved.</li>
+        <li><strong>“Not sure yet” is a real answer.</strong> Finding the gaps is the point.</li>
+        <li><strong>Who sees your answers:</strong> <span data-owner>the project lead</span> and anyone they share the results with. Your answers aren’t shown to other people filling this out.</li>
+      </ul>
+    </div>
+
+    <div class="card signin-card">
+      <section id="step-start" aria-labelledby="start-title">
+        <h2 id="start-title" tabindex="-1">Start or continue</h2>
+        <p class="hint">No password. We’ll email you a sign-in link and a 6-digit code.</p>
+        <p id="signin-error" class="error" role="alert" hidden></p>
+        <form id="signin-form" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required enterkeyhint="next">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" spellcheck="false" required enterkeyhint="send">
+          </div>
+          <button id="signin-submit" class="btn btn-primary btn-block" type="submit">Email me a sign-in link</button>
+        </form>
+      </section>
+
+      <section id="step-check" aria-labelledby="check-title" hidden>
+        <h2 id="check-title" tabindex="-1">Check your email</h2>
+        <p>We sent a link and a code to <strong id="sent-to"></strong>.</p>
+        <p class="hint">Click the link on any device — or type the code here if the email opened somewhere else. The link and code expire in an hour. Check spam if you don’t see it.</p>
+        <form id="code-form" novalidate>
+          <div class="field">
+            <label for="code">6-digit code</label>
+            <input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10" spellcheck="false" aria-describedby="code-error">
+          </div>
+          <p id="code-error" class="error" role="alert" hidden></p>
+          <button class="btn btn-primary btn-block" type="submit">Sign in with code</button>
+        </form>
+        <button id="use-different" class="btn btn-quiet" type="button">Use a different email</button>
+      </section>
+
+      <section id="step-back" aria-labelledby="back-title" hidden>
+        <h2 id="back-title" tabindex="-1">Welcome back, <span id="back-name"></span></h2>
+        <p>Your answers are right where you left them.</p>
+        <button id="continue" class="btn btn-primary btn-block" type="button">Continue</button>
+        <button id="not-me" class="btn btn-quiet" type="button">Not you? Sign out</button>
+      </section>
+    </div>
+  </main>
+  <div id="announcer" class="sr-only" aria-live="polite"></div>
+</body>
+</html>

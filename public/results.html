@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light dark">
+  <title>Results · Game Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script type="module" src="assets/js/results.js"></script>
+</head>
+<body class="page-results">
+  <a class="skip-link" href="#main">Skip to results</a>
+  <aside id="demo-banner" class="demo-banner" aria-label="Preview mode" hidden>
+    <strong>Preview mode.</strong> Showing only the answers saved in this browser.
+  </aside>
+  <header class="site-header">
+    <p class="brand"><span class="brand-mark" aria-hidden="true">GB</span> Game Blueprint · Results</p>
+    <div class="header-tools">
+      <a class="btn btn-quiet btn-small" href="survey.html">Back to the survey</a>
+      <button id="theme-toggle" class="btn btn-quiet btn-small" type="button" aria-pressed="false">Dark mode</button>
+    </div>
+  </header>
+
+  <main id="main" class="results-main">
+    <h1>What the team said</h1>
+    <p id="results-status" class="lede" role="status">Loading…</p>
+
+    <nav class="results-toc" aria-label="On this page" hidden>
+      <ul>
+        <li><a href="#people">People</a></li>
+        <li><a href="#disagree">Where the team disagrees</a></li>
+        <li><a href="#settled">How settled</a></li>
+        <li><a href="#roots">Why roots</a></li>
+        <li><a href="#naming">Name it</a></li>
+        <li><a href="#access">Accessibility gaps</a></li>
+        <li><a href="#all">Every answer</a></li>
+      </ul>
+    </nav>
+
+    <div id="results"></div>
+  </main>
+  <div id="announcer" class="sr-only" aria-live="polite"></div>
+</body>
+</html>

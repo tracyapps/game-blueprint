@@ -1,0 +1,46 @@
+.results-main {
+  max-inline-size: 84rem; margin-inline: auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 4rem;
+}
+.results-toc ul { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; padding: 0; list-style: none; }
+.results-block { margin-block: 3rem; padding-block-start: 1.5rem; border-block-start: 2px solid var(--border-soft); }
+
+.table-wrap {
+  overflow-x: auto; margin-block: 1rem;
+  border: 1px solid var(--border-soft); border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+table { border-collapse: collapse; inline-size: 100%; font-size: .9688rem; }
+th, td { padding: .55rem .75rem; text-align: start; vertical-align: top; border-block-end: 1px solid var(--border-soft); }
+thead th { background: var(--surface-2); position: sticky; top: 0; font-size: .875rem; }
+tbody th { font-weight: 700; }
+.num { text-align: end; white-space: nowrap; }
+.pre { white-space: pre-wrap; }
+.empty-cell { color: var(--muted); text-align: center; }
+.answers-table td:nth-child(3) { min-inline-size: 16rem; }
+.answers-table td:nth-child(4) { min-inline-size: 18rem; }
+
+.bar-cell { position: relative; min-inline-size: 5rem; }
+.bar {
+  position: absolute; inset-block: .35rem; inset-inline-end: .5rem;
+  max-inline-size: calc(100% - 1rem);
+  background: var(--selected-bg); border-radius: 3px;
+}
+.bar-num { position: relative; font-variant-numeric: tabular-nums; font-weight: 700; }
+
+.disagree-list { list-style: none; padding: 0; display: grid; gap: 1rem; > li {
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); padding: 1rem 1.25rem;
+} p { margin-block-end: .35rem; } }
+.split { list-style: none; padding: 0; display: grid; gap: .3rem; li { position: relative; padding: .2rem .5rem; } }
+.split-bar { position: absolute; inset-block: 0; inset-inline-start: 0; background: var(--selected-bg); border-radius: 3px; z-index: 0; }
+.split li { isolation: isolate; }
+.split li > :not(.split-bar) { position: relative; }
+
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0 1rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: .5rem 1rem; }
+.naming-level { margin-block: 2rem; }
+
+.muted { color: var(--muted); }
+.small { font-size: .875rem; }
+.strong { font-weight: 700; }
+details summary { cursor: pointer; color: var(--link); font-weight: 700; min-block-size: var(--tap); display: flex; align-items: center; }

@@ -1,0 +1,149 @@
+// A question -------------------------------------------------------------------
+.q {
+  margin-block: 1.25rem;
+  padding: 1.1rem 1.25rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.q-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.q-label { display: block; font-weight: 700; font-size: 1.0938rem; margin-block-end: .4rem; float: none; inline-size: 100%; }
+fieldset.q > .q-head { margin-block-end: .1rem; }
+.q-done {
+  flex: none; display: inline-grid; place-items: center;
+  inline-size: 1.75rem; block-size: 1.75rem; border-radius: 50%;
+  color: transparent; border: 2px dashed var(--border-soft);
+  .icon { inline-size: 1rem; block-size: 1rem; }
+  .sr-only { display: none; }
+  &.is-done {
+    color: var(--surface); background: var(--ok); border: 2px solid var(--ok);
+    .sr-only { display: block; }
+  }
+}
+
+// Certainty -----------------------------------------------------------------------
+.certainty {
+  margin-block-start: 1rem; padding-block-start: .85rem;
+  border-block-start: 1px dashed var(--border-soft);
+  .certainty-who { max-inline-size: 24rem; }
+}
+
+// Why ladder -------------------------------------------------------------------------
+.why {
+  margin-block-start: 1rem;
+  padding: .9rem 1rem 1rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  border-inline-start: 4px solid var(--accent);
+}
+.why-title { font-weight: 700; margin: 0; }
+.why-hint { margin-block-end: .5rem; }
+.why-steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: .6rem;
+  counter-reset: why;
+}
+.why-step {
+  display: grid; gap: .25rem;
+  padding-inline-start: 1.25rem;
+  position: relative;
+  // the "staircase" — each why sits a step deeper
+  &:nth-child(2) { margin-inline-start: .75rem; }
+  &:nth-child(3) { margin-inline-start: 1.5rem; }
+  &:nth-child(4) { margin-inline-start: 2.25rem; }
+  &:nth-child(5) { margin-inline-start: 3rem; }
+  &::before {
+    content: ''; position: absolute; inset-inline-start: .25rem; top: .35rem; bottom: .2rem;
+    border-inline-start: 2px solid var(--border-soft);
+  }
+  label { font-weight: 700; font-size: .9688rem; }
+}
+.why-actions { display: flex; flex-wrap: wrap; gap: .25rem; margin-block-start: .5rem; }
+.why-root { margin-block-start: .5rem; &:empty { display: none; } }
+
+// Repeaters ----------------------------------------------------------------------------
+.repeater-list { margin: 0 0 .5rem; padding: 0; list-style: none; display: grid; gap: .6rem; }
+.repeater-row { display: grid; gap: .2rem; }
+.repeater-label { font-size: .9375rem; font-weight: 700; color: var(--muted); }
+.repeater-field { display: flex; gap: .25rem; align-items: flex-start; textarea { flex: 1; } }
+.row-tools { display: flex; }
+@media (max-width: 36rem) {
+  .repeater-field { flex-direction: column; align-items: stretch; }
+  .row-tools { justify-content: flex-end; }
+}
+
+.records-list { display: grid; gap: 1rem; margin-block-end: .5rem; }
+.record {
+  padding: .75rem 1rem;
+  border: 2px solid var(--border-soft) !important;
+  border-radius: var(--radius-sm);
+  legend { font-weight: 700; padding-inline: .35rem; }
+}
+
+// Accessibility matrix ------------------------------------------------------------------
+.matrix { display: grid; gap: .85rem; }
+.matrix-row {
+  padding: .75rem 1rem;
+  border: 2px solid var(--border-soft) !important;
+  border-inline-start-width: 6px !important;
+  border-radius: var(--radius-sm);
+  > legend { font-weight: 700; padding-inline: .35rem; max-inline-size: 100%; }
+  .field { margin-block-end: 0; }
+  &[data-status="solved"] { border-inline-start-color: var(--ok) !important; }
+  &[data-status="partly"] { border-inline-start-color: var(--accent) !important; }
+  &[data-status="notyet"] { border-inline-start-color: var(--error) !important; }
+  &[data-status="unsure"] { border-inline-start-color: var(--border) !important; }
+}
+
+// Card sort --------------------------------------------------------------------------------
+.cards {
+  list-style: none; margin: .5rem 0 1rem; padding: 0;
+  display: grid; gap: .5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+}
+.card {
+  padding: .6rem .75rem .75rem;
+  background: var(--surface);
+  border: 2px solid var(--border-soft);
+  border-inline-start-width: 6px;
+  border-radius: var(--radius-sm);
+  &[data-rating="all"] { border-inline-start-color: var(--ok); }
+  &[data-rating="some"] { border-inline-start-color: var(--accent); }
+  &[data-rating="none"] { border-inline-start-color: var(--border); opacity: .85; }
+  .btn { margin-block-start: .25rem; }
+}
+.card-term { font-weight: 700; font-size: 1.125rem; margin-block-end: .35rem; }
+.card-options { display: grid; gap: .3rem; .pill { border-radius: var(--radius-sm); } }
+.card-add, .card-pick, .card-proof { margin-block: 1rem; }
+.proof {
+  padding: .9rem 1rem; background: var(--surface-2); border-radius: var(--radius-sm);
+  legend { font-weight: 700; float: left; inline-size: 100%; margin-block-end: .25rem; }
+  .hint { clear: both; }
+}
+
+// Review ----------------------------------------------------------------------------------
+.review-block { margin-block: 2rem; > h2 { font-size: 1.375rem; } }
+.review-list { padding-inline-start: 1.2rem; display: grid; gap: .4rem;
+  ul { padding-inline-start: 1.2rem; margin-block: .25rem .6rem; }
+}
+.count { color: var(--muted); font-weight: 400; }
+.empty { color: var(--ok); font-weight: 700; display: flex; gap: .4rem; align-items: center; }
+
+// Sign-in page ------------------------------------------------------------------------------
+.signin-main {
+  display: grid; gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: start;
+  max-inline-size: 68rem; margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+}
+@media (max-width: 52rem) { .signin-main { grid-template-columns: 1fr; } }
+.facts { padding-inline-start: 1.2rem; display: grid; gap: .5rem; }
+.card { box-shadow: var(--shadow); }
+.signin-card {
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  .btn-quiet { margin-block-start: .75rem; }
+  form .btn-primary { margin-block-start: .5rem; }
+}

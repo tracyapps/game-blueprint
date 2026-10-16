@@ -1,0 +1,14 @@
+{
+  "name": "game-blueprint",
+  "private": true,
+  "description": "Research tool: makes each game's rules, items and inclusion decisions explicit before they're built.",
+  "scripts": {
+    "build": "npm run build:css",
+    "build:css": "sass src/scss/main.scss public/assets/css/main.css --style=compressed --no-source-map",
+    "watch:css": "sass --watch src/scss/main.scss public/assets/css/main.css --no-source-map",
+    "dev": "npx --yes serve public -l 4321"
+  },
+  "devDependencies": {
+    "sass": "1.79.4"
+  }
+}

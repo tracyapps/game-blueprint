@@ -1,0 +1,76 @@
+// OMG brand tokens → semantic roles. Change the roles, not the components.
+$offwhite: #F9F9EB;
+$teal: #0F4C5B;
+$navy: #111A2B;
+$maroon: #331F1D;
+$army: #333D29;
+$orange: #D89A3A;
+$blue: #0A9396;
+$red: #B53649;
+$red-dark-safe: #D77A88;
+$yellow: #CABF02;
+$green: #A6CD10;
+
+@mixin light {
+  --bg: #{$offwhite};
+  --surface: #ffffff;
+  --surface-2: #EFEEDB;
+  --surface-3: #E3E2CC;
+  --text: #{$navy};
+  --muted: #4A5160;
+  --border: #767B6A;
+  --border-soft: #CFCDB4;
+  --primary: #{$teal};
+  --on-primary: #{$offwhite};
+  --link: #{$teal};
+  --accent: #{$orange};
+  --focus: #{$blue};
+  --error: #{$red};
+  --error-bg: #FBE9EC;
+  --ok: #2F6B3A;
+  --ok-bg: #E6F1E2;
+  --warn: #7A4E00;
+  --warn-bg: #FBEFD8;
+  --selected-bg: #DDEFEF;
+  --shadow: 0 1px 2px rgb(17 26 43 / .08), 0 4px 16px rgb(17 26 43 / .06);
+}
+
+@mixin dark {
+  --bg: #{$navy};
+  --surface: #18233A;
+  --surface-2: #1F2C47;
+  --surface-3: #283857;
+  --text: #{$offwhite};
+  --muted: #C3C7B8;
+  --border: #8590A6;
+  --border-soft: #34456A;
+  --primary: #3FB6B8;
+  --on-primary: #{$navy};
+  --link: #7FD3D4;
+  --accent: #{$orange};
+  --focus: #{$yellow};
+  --error: #{$red-dark-safe};
+  --error-bg: #3A1F2A;
+  --ok: #{$green};
+  --ok-bg: #1F3326;
+  --warn: #F0C46B;
+  --warn-bg: #3A2F17;
+  --selected-bg: #173E4C;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 4px 16px rgb(0 0 0 / .25);
+}
+
+:root {
+  @include light;
+  --font: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --space: 1rem;
+  --measure: 46rem;
+  --tap: 44px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark; color-scheme: dark; }
+}
+:root[data-theme="dark"] { @include dark; color-scheme: dark; }

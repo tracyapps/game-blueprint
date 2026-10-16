@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light dark">
+  <title>Game Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script type="module" src="assets/js/survey.js"></script>
+</head>
+<body class="page-survey">
+  <a class="skip-link" href="#section">Skip to questions</a>
+  <aside id="demo-banner" class="demo-banner" aria-label="Preview mode" hidden>
+    <strong>Preview mode.</strong> No database is connected yet, so answers are only kept in this browser.
+  </aside>
+
+  <header class="site-header app-header">
+    <p class="brand"><span class="brand-mark" aria-hidden="true">GB</span> <span>Game Blueprint</span></p>
+
+    <div id="save-bar" class="save-bar" data-status="clean">
+      <p id="save-status" class="save-status"></p>
+      <button id="save-now" class="btn btn-save" type="button" disabled><span id="save-now-label">Saved</span></button>
+    </div>
+
+    <div class="header-tools">
+      <span class="who">Signed in as <strong id="who"></strong></span>
+      <button id="theme-toggle" class="btn btn-quiet btn-small" type="button" aria-pressed="false">Dark mode</button>
+      <button id="sign-out" class="btn btn-quiet btn-small" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div id="overall" class="overall"></div>
+      <button id="nav-toggle" class="nav-toggle btn btn-secondary" type="button" aria-expanded="false" aria-controls="section-nav">
+        <span class="sr-only">Sections. Current: </span><span id="nav-toggle-label">Sections</span>
+      </button>
+      <nav id="section-nav" class="section-nav" aria-label="Sections"></nav>
+    </aside>
+
+    <main id="section" class="section" tabindex="-1">
+      <p class="loading">Loading your answers…</p>
+    </main>
+  </div>
+
+  <div id="announcer" class="sr-only" aria-live="polite"></div>
+</body>
+</html>
