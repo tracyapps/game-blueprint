@@ -26,7 +26,10 @@ function isSecret(k) {
 }
 
 if (!url || !key) {
-  console.log('[write-env] No Supabase env vars found — keeping env.js as is (preview mode unless config.js has keys).');
+  const seen = Object.keys(process.env).filter((n) => /SUPABASE/i.test(n));
+  console.log('[write-env] No Supabase URL + public key found — site will run in PREVIEW MODE.');
+  console.log(`[write-env] Supabase-related variable NAMES this build can see: ${seen.length ? seen.join(', ') : '(none)'}`);
+  console.log(`[write-env] Vercel environment: ${process.env.VERCEL_ENV || 'not on Vercel'}`);
   process.exit(0);
 }
 if (isSecret(key)) {
