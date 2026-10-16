@@ -54,19 +54,31 @@ To see the save-error state: in the browser console run `localStorage.setItem('g
    insert into public.admins (email) values ('t@thisroad.org') on conflict do nothing;
    ```
 4. **Authentication → URL Configuration**
-   - Site URL: your Vercel URL, e.g. `https://game-blueprint.vercel.app`
-   - Redirect URLs: add `https://game-blueprint.vercel.app/survey.html` (and `http://localhost:4321/survey.html` for testing)
-5. **Authentication → Emails → SMTP** — turn on custom SMTP with **Resend**. Supabase's built-in email only sends to your own team members and a couple per hour, so this step is required.
-   - Host `smtp.resend.com` · Port `465` · Username `resend` · Password: a Resend API key
-   - Sender: an address on a domain you've verified in Resend
-6. **Authentication → Emails → Templates → Magic Link** — make sure the email includes the code as well as the link, so people who open email on their phone can still sign in on their laptop:
+   - Site URL: `https://game-blueprint-rho.vercel.app`
+   - Redirect URLs: add `https://game-blueprint-rho.vercel.app/survey.html` (and `http://localhost:4321/survey.html` for local testing)
+5. **Authentication → Emails → SMTP Settings** — turn on **Enable custom SMTP**. Supabase's built-in email only sends to your own team members and a couple per hour, so this step is required.
+   | Field | Value |
+   |---|---|
+   | Sender email | `hi@expdesign.app` |
+   | Sender name | `Tapps` |
+   | Host | `smtp.resend.com` |
+   | Port | `465` |
+   | Username | `resend` |
+   | Password | a Resend API key (expdesign.app is already verified in Resend) |
+
+   Save.
+6. **Authentication → Emails → Templates.** First-timers get the **Confirm signup** email and returning people get the **Magic Link** email, so set up **both** the same way:
+   - **Subject:** `Your login code and link`
+   - **Message body:** replace everything with the HTML below. The `{{ .Token }}` line is the 6-digit code. It lets someone who opens the email on their phone type the code into the sign-in page on their laptop. Leave the `{{ … }}` parts exactly as written; Supabase fills them in.
    ```html
    <h2>Your Game Blueprint sign-in</h2>
-   <p><a href="{{ .ConfirmationURL }}">Sign in</a></p>
-   <p>Or enter this code: <strong>{{ .Token }}</strong></p>
-   <p>Expires in 1 hour. If you didn't ask for this, ignore it.</p>
+   <p><a href="{{ .ConfirmationURL }}">Sign in to Game Blueprint</a></p>
+   <p>Or type this code on the sign-in page: <strong style="font-size:1.5em;letter-spacing:.15em">{{ .Token }}</strong></p>
+   <p>The link and code expire in 1 hour. If you didn't ask for this, you can ignore it.</p>
+   <p>— Tapps</p>
    ```
-   Do the same for the **Confirm signup** template (first-timers get that one).
+   Save each template.
+
 ### 2. Connect Supabase to Vercel (pick ONE)
 
 The site needs two public values: the Supabase **Project URL** and the **anon / publishable key**. During each Vercel build, `scripts/write-env.mjs` copies them from Vercel's environment variables into `public/assets/js/env.js`. You never paste keys into the repo.
